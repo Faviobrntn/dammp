@@ -1,0 +1,66 @@
+version: "3"
+
+services:
+    mysql:
+        image: mysql:5.7
+        # restart: always
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+        volumes:
+        # Montamos un volumen para MySQL para no perder los datos de bd
+            - ./volumenes/mysql:/var/lib/mysql
+        expose:
+            - 3306
+
+    php70:
+        image: chialab/php:7.0-apache
+        container_name: apache-php70
+        volumes:
+            # Montamos nuestra web desde fuera en el directorio web del contenedor
+            - ./htdocs:/var/www/html
+        expose:
+            - 8080
+        ports:
+            - 8070:80
+        links: 
+            - mysql
+        environment:
+            WWWUSER: "${id -u}"
+        build:
+            args:
+                WWWGROUP: "${id -g}"
+
+    php74:
+        image: chialab/php:7.4-apache
+        container_name: apache-php74
+        volumes:
+            # Montamos nuestra web desde fuera en el directorio web del contenedor
+            - ./htdocs:/var/www/html
+        expose:
+            - 8080
+        ports:
+            - 8074:80
+        links: 
+            - mysql
+        environment:
+            WWWUSER: "${id -u}"
+        build:
+            args:
+                WWWGROUP: "${id -g}"
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        # restart: always
+        # container_name: phpmyadmin
+        ports: 
+            - "8081:80"
+        volumes:
+            - ./config/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+        environment:
+            PMA_HOSTS: mysql
+            UPLOAD_LIMIT: 100M
+        depends_on:
+            - mysql
+        links:
+            - mysql
+            
