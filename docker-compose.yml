@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3"
 
 services:
     mysql:
@@ -12,18 +12,44 @@ services:
         expose:
             - 3306
 
-    # php70:
-    #     image: chialab/php:7.0-apache
-    #     container_name: apache-php70
-    #     volumes:
-    #         # Montamos nuestra web desde fuera en el directorio web del contenedor
-    #         - ./htdocs:/var/www/html
-    #     expose:
-    #         - 8080
-    #     ports:
-    #         - 8070:80
-    #     links: 
-    #         - mysql
+    php56:
+        image: chialab/php:5.6-apache
+        container_name: apache-php56
+        volumes:
+            # Montamos nuestra web desde fuera en el directorio web del contenedor
+            - ./htdocs:/var/www/html
+        expose:
+            - 8080
+        ports:
+            - 8056:80
+        links: 
+            - mysql
+
+    php70:
+        image: chialab/php:7.0-apache
+        container_name: apache-php70
+        volumes:
+            # Montamos nuestra web desde fuera en el directorio web del contenedor
+            - ./htdocs:/var/www/html
+        expose:
+            - 8080
+        ports:
+            - 8070:80
+        links: 
+            - mysql
+
+    php72:
+        image: chialab/php:7.2-apache
+        container_name: apache-php72
+        volumes:
+            # Montamos nuestra web desde fuera en el directorio web del contenedor
+            - ./htdocs:/var/www/html
+        expose:
+            - 8080
+        ports:
+            - 8072:80
+        links: 
+            - mysql
 
     php74:
         image: chialab/php:7.4-apache

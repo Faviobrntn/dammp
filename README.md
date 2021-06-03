@@ -47,7 +47,7 @@ Dentro de la carpeta raíz, va a usar el siguiente comando:
 Si todo salio bien, ya podrá poner sus proyectos/scripts PHP dentro de la carpeta htdocs y visualizarlos en el navegador.
 
 ## Links
-- PhpMyAdmin en http://localhost:8081/ (Usuario: root | Contraseña: root)
+- PhpMyAdmin en http://localhost:8001/ (Usuario: root | Contraseña: root)
 - Apache con PHP 5.6 en http://localhost:8056/
 - Apache con PHP 7.0 en http://localhost:8070/
 - Apache con PHP 7.2 en http://localhost:8072/
@@ -63,6 +63,7 @@ Tengo un proyecto que se llama "prueba" que esta en la version 7.0 de PHP
 
 ## Comandos útiles
 - Ver listado de contenedores `docker ps -a`
-- Entrar a la consola de un contenedor: `docker exec -it <NOMBRE_CONTENEDOR> /bin/bash`
+- Entrar a la consola de un contenedor: `docker exec -it <NOMBRE_CONTENEDOR> /bin/bash`.  
+    - Recomiendo ejecutar el comando con los permisos de usuario asi evitas ese problema al generar archivos desde adentro cuando tenes una carpeta compartida. Suponiendo que quiero ingresar al contenedor de apache con php 7.4, ejecutamos: `docker exec -it -u $(id -u):$(id -g) apache-php74 /bin/bash`
 - Detener todos los contenedores: `docker-compose down` (solo funciona dentro del la carpeta raíz)
 - Volver a levantar los contenedores: `docker-compose up -d` (solo funciona dentro del la carpeta raíz)
