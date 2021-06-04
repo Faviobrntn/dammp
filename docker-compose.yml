@@ -3,7 +3,7 @@ version: "3"
 services:
     mysql:
         image: mysql:latest
-        # restart: always
+        restart: always
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
         volumes:
@@ -15,6 +15,7 @@ services:
     php56:
         image: chialab/php:5.6-apache
         container_name: apache-php56
+        restart: always
         volumes:
             # Montamos nuestra web desde fuera en el directorio web del contenedor
             - ./htdocs:/var/www/html
@@ -28,6 +29,7 @@ services:
     php70:
         image: chialab/php:7.0-apache
         container_name: apache-php70
+        restart: always
         volumes:
             # Montamos nuestra web desde fuera en el directorio web del contenedor
             - ./htdocs:/var/www/html
@@ -41,6 +43,7 @@ services:
     php72:
         image: chialab/php:7.2-apache
         container_name: apache-php72
+        restart: always
         volumes:
             # Montamos nuestra web desde fuera en el directorio web del contenedor
             - ./htdocs:/var/www/html
@@ -54,8 +57,7 @@ services:
     php74:
         image: chialab/php:7.4-apache
         container_name: apache-php74
-        #command: python manage.py runserver 0.0.0.0:8000
-        #command: chown -R www-data:www-data /var/www
+        restart: always
         volumes:
             # Montamos nuestra web desde fuera en el directorio web del contenedor
             - ./htdocs:/var/www/html
@@ -68,8 +70,8 @@ services:
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
-        # restart: always
         # container_name: phpmyadmin
+        restart: always
         ports: 
             - "${PHPMYADMIN_PORT}:80"
         volumes:
