@@ -67,3 +67,4 @@ Tengo un proyecto que se llama "prueba" que esta en la version 7.0 de PHP
     - Recomiendo ejecutar el comando con los permisos de usuario asi evitas ese problema al generar archivos desde adentro cuando tenes una carpeta compartida. Suponiendo que quiero ingresar al contenedor de apache con php 7.4, ejecutamos: `docker exec -it -u $(id -u):$(id -g) apache-php74 /bin/bash`
 - Detener todos los contenedores: `docker-compose down` (solo funciona dentro del la carpeta raíz)
 - Volver a levantar los contenedores: `docker-compose up -d` (solo funciona dentro del la carpeta raíz)
+- Como saber mi IP: `docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <contenedor>`. Ejemplo: `docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'  apache-php74`
