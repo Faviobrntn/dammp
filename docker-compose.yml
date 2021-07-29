@@ -83,4 +83,19 @@ services:
             - mysql
         links:
             - mysql
+
+    mailhog:
+        image: mailhog/mailhog:latest 
+        container_name: ${CONTAINER_NAME}-mailhog
+        ports:
+            - "${MAILHOG_PORT}:8025"
+
+    mongo:
+        image: mongo
+        container_name: ${CONTAINER_NAME}-mongo
+        restart: always
+        volumes:
+            - ./volumenes/mongodb:/data/db        
+        ports:
+            - ${MONGO_PORT}:27017
             
