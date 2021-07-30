@@ -7,14 +7,14 @@ services:
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
         volumes:
-        # Montamos un volumen para MySQL para no perder los datos de bd
+            # Montamos un volumen para MySQL para no perder los datos de bd
             - ./volumenes/mysql:/var/lib/mysql
         expose:
             - 3306
 
     php56:
         image: chialab/php:5.6-apache
-        container_name: apache-php56
+        container_name: ${CONTAINER_NAME}-php56
         restart: always
         volumes:
             # Montamos nuestra web desde fuera en el directorio web del contenedor
@@ -28,7 +28,7 @@ services:
 
     php70:
         image: chialab/php:7.0-apache
-        container_name: apache-php70
+        container_name: ${CONTAINER_NAME}-php70
         restart: always
         volumes:
             # Montamos nuestra web desde fuera en el directorio web del contenedor
@@ -42,7 +42,7 @@ services:
 
     php72:
         image: chialab/php:7.2-apache
-        container_name: apache-php72
+        container_name: ${CONTAINER_NAME}-php72
         restart: always
         volumes:
             # Montamos nuestra web desde fuera en el directorio web del contenedor
@@ -56,7 +56,7 @@ services:
 
     php74:
         image: chialab/php:7.4-apache
-        container_name: apache-php74
+        container_name: ${CONTAINER_NAME}-php74
         restart: always
         volumes:
             # Montamos nuestra web desde fuera en el directorio web del contenedor
@@ -70,7 +70,7 @@ services:
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
-        # container_name: phpmyadmin
+        container_name: ${CONTAINER_NAME}-phpmyadmin
         restart: always
         ports: 
             - "${PHPMYADMIN_PORT}:80"
