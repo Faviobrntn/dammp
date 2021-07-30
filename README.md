@@ -1,4 +1,4 @@
-# Docker Apache MultiPHP
+# DAMMP (Docker Apache Mysql Mongo PHP)
 
 Esta es una opción para desarrolladores que tienen varios proyectos PHP en distintas versiones. Le facilita tener todo en un solo lugar y a la vez poder probar un mismo proyecto en varias versiones.
 Docker debe estar instalado y corriendo en el Sistema Operativo.
