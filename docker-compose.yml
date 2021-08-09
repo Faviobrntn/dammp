@@ -25,6 +25,7 @@ services:
             - 8056:80
         links: 
             - mysql
+            - mailhog
 
     php70:
         image: chialab/php:7.0-apache
@@ -39,6 +40,7 @@ services:
             - 8070:80
         links: 
             - mysql
+            - mailhog
 
     php72:
         image: chialab/php:7.2-apache
@@ -53,6 +55,7 @@ services:
             - 8072:80
         links: 
             - mysql
+            - mailhog
 
     php74:
         image: chialab/php:7.4-apache
@@ -67,6 +70,7 @@ services:
             - 8074:80
         links: 
             - mysql
+            - mailhog
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
