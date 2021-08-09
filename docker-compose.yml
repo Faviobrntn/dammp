@@ -4,6 +4,7 @@ services:
     mysql:
         image: mysql:latest
         restart: always
+        container_name: ${CONTAINER_NAME}-mysql
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
         volumes:
@@ -12,50 +13,50 @@ services:
         expose:
             - 3306
 
-    # php56:
-    #     image: chialab/php:5.6-apache
-    #     container_name: ${CONTAINER_NAME}-php56
-    #     restart: always
-    #     volumes:
-    #         # Montamos nuestra web desde fuera en el directorio web del contenedor
-    #         - ./htdocs:/var/www/html
-    #     expose:
-    #         - 8080
-    #     ports:
-    #         - 8056:80
-    #     links: 
-    #         - mysql
-    #         - mailhog
+    php56:
+        image: chialab/php:5.6-apache
+        container_name: ${CONTAINER_NAME}-php56
+        restart: always
+        volumes:
+            # Montamos nuestra web desde fuera en el directorio web del contenedor
+            - ./htdocs:/var/www/html
+        expose:
+            - 8080
+        ports:
+            - 8056:80
+        links: 
+            - mysql
+            - mailhog
 
-    # php70:
-    #     image: chialab/php:7.0-apache
-    #     container_name: ${CONTAINER_NAME}-php70
-    #     restart: always
-    #     volumes:
-    #         # Montamos nuestra web desde fuera en el directorio web del contenedor
-    #         - ./htdocs:/var/www/html
-    #     expose:
-    #         - 8080
-    #     ports:
-    #         - 8070:80
-    #     links: 
-    #         - mysql
-    #         - mailhog
+    php70:
+        image: chialab/php:7.0-apache
+        container_name: ${CONTAINER_NAME}-php70
+        restart: always
+        volumes:
+            # Montamos nuestra web desde fuera en el directorio web del contenedor
+            - ./htdocs:/var/www/html
+        expose:
+            - 8080
+        ports:
+            - 8070:80
+        links: 
+            - mysql
+            - mailhog
 
-    # php72:
-    #     image: chialab/php:7.2-apache
-    #     container_name: ${CONTAINER_NAME}-php72
-    #     restart: always
-    #     volumes:
-    #         # Montamos nuestra web desde fuera en el directorio web del contenedor
-    #         - ./htdocs:/var/www/html
-    #     expose:
-    #         - 8080
-    #     ports:
-    #         - 8072:80
-    #     links: 
-    #         - mysql
-    #         - mailhog
+    php72:
+        image: chialab/php:7.2-apache
+        container_name: ${CONTAINER_NAME}-php72
+        restart: always
+        volumes:
+            # Montamos nuestra web desde fuera en el directorio web del contenedor
+            - ./htdocs:/var/www/html
+        expose:
+            - 8080
+        ports:
+            - 8072:80
+        links: 
+            - mysql
+            - mailhog
 
     php74:
         image: chialab/php:7.4-apache
