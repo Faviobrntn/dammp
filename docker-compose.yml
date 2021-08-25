@@ -92,6 +92,7 @@ services:
     mailhog:
         image: mailhog/mailhog:latest 
         container_name: ${CONTAINER_NAME}-mailhog
+        restart: always
         ports:
             - "${MAILHOG_PORT}:8025"
 
