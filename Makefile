@@ -14,3 +14,6 @@ bash: #Ingresar a la consola de un contenedor
 
 cmd: #Ejecutar un comando dentro del contenedor
 	docker-compose exec dampp-php74 bash
+
+mysql-dump:
+	docker exec dammp-mysql sh -c 'exec mysqldump --all-databases -uroot -p"root"' > ./all-databases.sql

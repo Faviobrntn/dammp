@@ -1,0 +1,3 @@
+# config/*
+# phpmyadmin/*
+phpmyadmin/config.user.inc.php

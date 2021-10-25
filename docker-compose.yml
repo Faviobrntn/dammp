@@ -10,6 +10,7 @@ services:
         volumes:
             # Montamos un volumen para MySQL para no perder los datos de bd
             - ./volumenes/mysql:/var/lib/mysql
+            - ./config/config-custom.cnf:/etc/mysql/conf.d/mysql.cnf
         expose:
             - 3306
 
@@ -20,6 +21,7 @@ services:
         volumes:
             # Montamos nuestra web desde fuera en el directorio web del contenedor
             - ./htdocs:/var/www/html
+            - ./config/php/php.ini:$PHP_INI_DIR/php.ini
         expose:
             - 8080
         ports:
@@ -35,6 +37,7 @@ services:
         volumes:
             # Montamos nuestra web desde fuera en el directorio web del contenedor
             - ./htdocs:/var/www/html
+            - ./config/php/php.ini:$PHP_INI_DIR/php.ini
         expose:
             - 8080
         ports:
@@ -50,6 +53,7 @@ services:
         volumes:
             # Montamos nuestra web desde fuera en el directorio web del contenedor
             - ./htdocs:/var/www/html
+            - ./config/php/php.ini:$PHP_INI_DIR/php.ini
         expose:
             - 8080
         ports:
@@ -65,6 +69,7 @@ services:
         volumes:
             # Montamos nuestra web desde fuera en el directorio web del contenedor
             - ./htdocs:/var/www/html
+            - ./config/php/php.ini:$PHP_INI_DIR/php.ini
         expose:
             - 8080
         ports:
