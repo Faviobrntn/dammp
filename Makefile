@@ -17,3 +17,6 @@ cmd: #Ejecutar un comando dentro del contenedor
 
 mysql-dump:
 	docker exec dammp-mysql sh -c 'exec mysqldump --all-databases -uroot -p"root"' > ./all-databases.sql
+
+uninstall:
+	docker rmi $(docker image ls -q)
