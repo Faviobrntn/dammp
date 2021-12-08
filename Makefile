@@ -24,3 +24,17 @@ uninstall: #docker rmi $(docker image ls -q)
 
 
 #Eliminar todos los contenedores:  docker rm $(docker ps -a -q) 
+
+
+install:
+	docker run -d \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v $PWD/config/traefik/traefik.toml:/traefik.toml \
+		-v $PWD/config/traefik/acme.json:/acme.json \
+		-p 80:80 \
+		-p 443:443 \
+		-l traefik.frontend.rule=Host:monitor.localhost \
+		-l traefik.port=8080 \
+		--network web \
+		--name traefik \
+		traefik:1.7.2-alpine
