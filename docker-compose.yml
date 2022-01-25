@@ -13,10 +13,6 @@ services:
             - ./config/mysql/config-custom.cnf:/etc/mysql/conf.d/mysql.cnf
         expose:
             - 3306
-        networks:
-            - internal
-        labels:
-            - traefik.enable=false
 
     php56:
         image: chialab/php:5.6-apache
@@ -29,14 +25,10 @@ services:
         links: 
             - mysql
             - mailhog
-        labels:
-            - traefik.backend=php56
-            - traefik.frontend.rule=Host:php56.localhost
-            - traefik.docker.network=web
-            - traefik.port=80
         networks:
             - internal
-            - web
+        ports:
+            - 8056:80
 
     php70:
         image: chialab/php:7.0-apache
@@ -49,14 +41,10 @@ services:
         links: 
             - mysql
             - mailhog
-        labels:
-            - traefik.backend=php70
-            - traefik.frontend.rule=Host:php70.localhost
-            - traefik.docker.network=web
-            - traefik.port=80
         networks:
             - internal
-            - web
+        ports:
+            - 8070:80
 
     php72:
         image: chialab/php:7.2-apache
@@ -69,14 +57,10 @@ services:
         links: 
             - mysql
             - mailhog
-        labels:
-            - traefik.backend=php72
-            - traefik.frontend.rule=Host:php72.localhost
-            - traefik.docker.network=web
-            - traefik.port=80
         networks:
             - internal
-            - web
+        ports:
+            - 8072:80
 
     php74:
         image: chialab/php:7.4-apache
@@ -88,15 +72,11 @@ services:
             - ./config/php/php.ini-development:/usr/local/etc/php/php.ini
         links: 
             - mysql
-            # - mailhog
-        labels:
-            - traefik.backend=php74
-            - traefik.frontend.rule=Host:php74.localhost
-            - traefik.docker.network=web
-            - traefik.port=80
+            - mailhog
         networks:
             - internal
-            - web
+        ports:
+            - 8074:80
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
@@ -111,27 +91,17 @@ services:
             - mysql
         links:
             - mysql
-        labels:
-            - traefik.backend=phpmyadmin
-            - traefik.frontend.rule=Host:phpmyadmin.localhost
-            - traefik.docker.network=web
-            - traefik.port=80
+        ports:
+            - 8001:80
         networks:
             - internal
-            - web
 
     mailhog:
         image: mailhog/mailhog:latest 
         container_name: ${CONTAINER_NAME}-mailhog
         restart: always
-        labels:
-            - traefik.backend=mailhog
-            - traefik.frontend.rule=Host:mailhog.localhost
-            - traefik.docker.network=web
-            - traefik.port=8025
         networks:
             - internal
-            - web
 
     mongo:
         image: mongo
@@ -144,27 +114,6 @@ services:
         labels:
             - traefik.enable=false
 
-    traefik:
-        restart: always
-        image: traefik:1.7.2-alpine
-        container_name: dammp-traefik
-        ports:
-            - 80:80
-            - 443:443
-            - 8080:8080 #The web UI (enabled by --api)
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
-            - ./config/traefik/traefik.toml:/traefik.toml
-            - ./config/traefik/acme.json:/acme.json
-        networks:
-            - web
-        labels:
-            - traefik.frontend.rule=Host:monitor.localhost
-            - traefik.port=8080
-
-
 networks:
     internal:
         external: false
-    web:
-        external: true
