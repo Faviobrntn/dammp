@@ -18,10 +18,22 @@ cmd: #Ejecutar un comando dentro del contenedor
 mysql-dump:
 	docker exec dammp-mysql sh -c 'exec mysqldump --all-databases -uroot -p"root"' > ./all-databases.sql
 
+# IMPORTAR DB MYSQL: docker exec -t <CONTENEDOR_MYSQL> mysql -u root -p"secret" nombre_db < archivo.sql
+importar_db:
+	docker exec -i dammp-mysql mysql -u root -p"root" db_name < db_name.sql
+
+# EXPORTAR DB MYSQL: docker exec -t <CONTENEDOR_MYSQL> mysqldump -u root -p"" nombre_db > archivo.sql
+exportar_db:
+	docker exec -i dammp-mysql mysqldump -u root -p"root" db_name > db_name.sql
+
+
+
 uninstall: #docker rmi $(docker image ls -q)
-	docker rmi `docker images -q`; docker network prune
+	docker rmi `docker images -q`; docker network prune; docker volume prune
 
 
+# pass_traefik: #htpasswd -nb admin dammpadmin
+# 	htpasswd -nb admin
 
 #Eliminar todos los contenedores:  docker rm $(docker ps -a -q) 
 
