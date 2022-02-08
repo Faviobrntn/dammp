@@ -2,6 +2,7 @@ version: "3"
 
 services:
     mysql:
+        #platform: linux/x86_64
         image: mysql:latest
         restart: always
         container_name: ${CONTAINER_NAME}-mysql
@@ -15,6 +16,7 @@ services:
             - 3306
 
     php56:
+        #platform: linux/x86_64
         image: chialab/php:5.6-apache
         container_name: ${CONTAINER_NAME}-php56
         restart: always
@@ -31,6 +33,7 @@ services:
             - 8056:80
 
     php70:
+        #platform: linux/x86_64
         image: chialab/php:7.0-apache
         container_name: ${CONTAINER_NAME}-php70
         restart: always
@@ -47,6 +50,7 @@ services:
             - 8070:80
 
     php72:
+        #platform: linux/x86_64
         image: chialab/php:7.2-apache
         container_name: ${CONTAINER_NAME}-php72
         restart: always
@@ -63,6 +67,7 @@ services:
             - 8072:80
 
     php74:
+        #platform: linux/x86_64
         image: chialab/php:7.4-apache
         container_name: ${CONTAINER_NAME}-php74
         restart: always
@@ -79,6 +84,7 @@ services:
             - 8074:80
 
     phpmyadmin:
+        #platform: linux/x86_64
         image: phpmyadmin/phpmyadmin
         container_name: ${CONTAINER_NAME}-phpmyadmin
         restart: always
@@ -97,6 +103,7 @@ services:
             - internal
 
     mailhog:
+        #platform: linux/x86_64
         image: mailhog/mailhog:latest 
         container_name: ${CONTAINER_NAME}-mailhog
         restart: always
@@ -104,6 +111,7 @@ services:
             - internal
 
     mongo:
+        #platform: linux/x86_64
         image: mongo
         container_name: ${CONTAINER_NAME}-mongo
         restart: always
@@ -111,8 +119,6 @@ services:
             - ./volumenes/mongodb:/data/db
         networks:
             - internal
-        labels:
-            - traefik.enable=false
 
 networks:
     internal:
