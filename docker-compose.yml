@@ -14,6 +14,8 @@ services:
             - ./config/mysql/config-custom.cnf:/etc/mysql/conf.d/mysql.cnf
         expose:
             - 3306
+        networks:
+            - internal
 
     php56:
         #platform: linux/x86_64
