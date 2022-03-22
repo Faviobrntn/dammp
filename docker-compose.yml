@@ -8,6 +8,9 @@ services:
         container_name: ${CONTAINER_NAME}-mysql
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
         volumes:
             # Montamos un volumen para MySQL para no perder los datos de bd
             - ./volumenes/mysql:/var/lib/mysql
