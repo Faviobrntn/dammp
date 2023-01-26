@@ -8,8 +8,6 @@ services:
         container_name: ${CONTAINER_NAME}-mysql
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
         volumes:
             # Montamos un volumen para MySQL para no perder los datos de bd
@@ -88,24 +86,24 @@ services:
         ports:
             - 8074:80
 
-    phpmyadmin:
-        #platform: linux/x86_64
-        image: phpmyadmin/phpmyadmin
-        container_name: ${CONTAINER_NAME}-phpmyadmin
-        restart: always
-        volumes:
-            - ./config/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
-        environment:
-            PMA_HOSTS: mysql
-            UPLOAD_LIMIT: 100M
-        depends_on:
-            - mysql
-        links:
-            - mysql
-        ports:
-            - 8001:80
-        networks:
-            - internal
+    # phpmyadmin:
+    #     #platform: linux/x86_64
+    #     image: phpmyadmin/phpmyadmin
+    #     container_name: ${CONTAINER_NAME}-phpmyadmin
+    #     restart: always
+    #     volumes:
+    #         - ./config/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+    #     environment:
+    #         PMA_HOSTS: mysql
+    #         UPLOAD_LIMIT: 100M
+    #     depends_on:
+    #         - mysql
+    #     links:
+    #         - mysql
+    #     ports:
+    #         - 8001:80
+    #     networks:
+    #         - internal
 
     mailhog:
         #platform: linux/x86_64
